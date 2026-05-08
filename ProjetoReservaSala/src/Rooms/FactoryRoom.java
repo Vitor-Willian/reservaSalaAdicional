@@ -10,6 +10,6 @@ public class FactoryRoom {
         } else if (type.equalsIgnoreCase("grupo")) {
             return new Group_Room(roomNumber, capacity);
         }
-        return null;
+        throw new IllegalArgumentException("Tipo de sala inválido: " + type);
     }
 }
