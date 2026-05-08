@@ -1,3 +1,5 @@
+package Rooms;
+
 public class Individual_Room implements Room {
     private int roomNumber;
     private boolean isOccupied;

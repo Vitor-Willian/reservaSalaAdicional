@@ -1,3 +1,5 @@
+package Rooms;
+
 public class Group_Room implements Room {
     private int roomNumber;
     private int capacity;
@@ -16,7 +18,7 @@ public class Group_Room implements Room {
     public int getCapacity() {
         return capacity;
     }
-    
+
     public boolean isOccupied() {
         return isOccupied;
     }
