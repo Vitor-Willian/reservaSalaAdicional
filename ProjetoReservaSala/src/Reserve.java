@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import Rooms.*;
+
 public class Reserve {
     private User user;
     private LocalDate start_date, end_date;
