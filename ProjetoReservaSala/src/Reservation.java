@@ -8,9 +8,27 @@ public class Reservation {
         this.reserves = new ArrayList<>();
     }
 
-    void addReserve(Reserve reserve){
-        reserves.add(reserve);
+    private boolean hasConflict(Reserve newReserve) {
+        for (Reserve existingReserve : reserves) {
+            if (existingReserve.getRoom().getRoomNumber() == newReserve.getRoom().getRoomNumber()) {
+                if (existingReserve.getStart_schedule().isBefore(newReserve.getEnd_schedule()) &&
+                    newReserve.getStart_schedule().isBefore(existingReserve.getEnd_schedule())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+
+    boolean addReserve(Reserve reserve){
+        if (hasConflict(reserve)) {
+            System.out.println("ERRO: Conflito");
+            return false;
+        }
+        reserves.add(reserve);
+        return true;
+    }
+
     void removeReserve(Reserve reserve){
         reserves.remove(reserve);
     }
