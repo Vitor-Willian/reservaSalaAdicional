@@ -13,11 +13,13 @@ public class Reservation {
     }
     void removeReserve(Reserve reserve){
         reserves.remove(reserve);
+        reserve.notifyObservers("Reserva Cancelada: " + reserve.getUser().getName() + " " + reserve.getRoom().getRoomNumber());
     }
     void updateReserve(Reserve oldReserve, Reserve newReserve){
         int index = reserves.indexOf(oldReserve);
         if (index != -1) {
             reserves.set(index, newReserve);
+            newReserve.notifyObservers("Reserva Atualizada: " + newReserve.getUser().getName() + " " + newReserve.getRoom().getRoomNumber());
         }
         else {
             System.out.println("Reserva não encontrada: " + oldReserve);

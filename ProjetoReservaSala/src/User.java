@@ -1,4 +1,4 @@
-public class User {
+public class User implements Observer {
     private String name;
     private String role;
 
@@ -17,5 +17,10 @@ public class User {
 
     public String getRole() {
         return role;
+    }
+
+    @Override
+    public void update(Subject subject, String message) {
+        System.out.println("Usuário < " + this.name + " > recebeu notificação: " + message);
     }
 }
