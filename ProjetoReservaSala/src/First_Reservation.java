@@ -18,10 +18,11 @@ public class First_Reservation extends Reservation_Strategy {
 
     void addReserve(Reserve reserve){
         if (hasConflict(reserve)) {
-            System.out.println("ERRO: Conflito");
+            reserve.notifyObservers("Conflito | Reserva de " + reserve.getUser().getName() + " " + reserve.getRoom().getRoomNumber() + " não efetuada");
             return;
         }
         this.reserves.add(reserve);
+        reserve.notifyObservers("Reserva efetuada: " + reserve.getUser().getName() + " " + reserve.getRoom().getRoomNumber());
     }
     
 }
