@@ -17,7 +17,7 @@ public class Reserve implements Subject{
         this.room = room;
         
         addObserver(this.user);
-        notifyObservers("Reserva Criada: " + this.user.getName() + " " + this.room.getRoomNumber());
+        notifyObservers("Reserva Solicitada: " + this.user.getName() + " " + this.room.getRoomNumber());
     }
 
     @Override
