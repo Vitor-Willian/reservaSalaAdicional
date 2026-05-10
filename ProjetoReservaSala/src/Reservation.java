@@ -47,7 +47,6 @@ public class Reservation {
             System.out.println(reserve.getUser().getName() + " reservou a sala " + reserve.getRoom().getRoomNumber() + " das " + reserve.getStart_schedule() + " às " + reserve.getEnd_schedule());
         }
     }
-
     public List<Reserve> getReserves() {
         return this.reserves;
     }
