@@ -18,5 +18,7 @@ public class App {
 
         reservation.listReserves();
         reservation.removeReserve(reserve1);
+        
+        reserve2 = new Multimedia_Decorator(reserve2, "Projetor");
     }
 }
