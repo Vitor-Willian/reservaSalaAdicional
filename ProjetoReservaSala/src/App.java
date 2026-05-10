@@ -7,7 +7,6 @@ public class App {
         User user2 = new User("Ana", "Professor");
         Room room1 = FactoryRoom.createRoom("individual", 101, 0);
 
-        reservation.setStrategy(new Priority_Reservation());
 
         Reserve reserve1 = new Reserve(user1, "2024-06-01 14:00", "2024-06-01 16:00", room1); 
         reservation.addReserve(reserve1);
@@ -16,8 +15,12 @@ public class App {
         reservation.addReserve(reserve2);
 
         reservation.listReserves();
-        reservation.removeReserve(reserve1);
+        //reservation.removeReserve(reserve1);
         
         reserve2 = new Multimedia_Decorator(reserve2, "Projetor");
+
+        reservation.setStrategy(new Priority_Reservation(reservation.getReserves()));
+        reservation.listReserves();
+
     }
 }

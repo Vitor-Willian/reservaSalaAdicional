@@ -1,7 +1,9 @@
+import java.util.List;
+
 public class Priority_Reservation extends Reservation_Strategy {
 
-    public Priority_Reservation() {
-        super();
+    public Priority_Reservation(List<Reserve> reserves) {
+        super(reserves);
     }
 
     private Reserve hasConflict(Reserve newReserve) {

@@ -1,7 +1,9 @@
+import java.util.List;
+
 public class First_Reservation extends Reservation_Strategy {
 
-    public First_Reservation() {
-        super();
+    public First_Reservation(List<Reserve> reserves) {
+        super(reserves);
     }
 
     private boolean hasConflict(Reserve newReserve) {
