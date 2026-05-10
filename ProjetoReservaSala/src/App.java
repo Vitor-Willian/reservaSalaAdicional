@@ -2,8 +2,7 @@ import Rooms.*;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        // Teste de criação de reserva
-        Reservation reservation = new Reservation();
+        Reservation reservation = Reservation.getInstance();
         User user1 = new User("Marcos", "Aluno");
         User user2 = new User("Ana", "Professor");
         Room room1 = FactoryRoom.createRoom("individual", 101, 0);

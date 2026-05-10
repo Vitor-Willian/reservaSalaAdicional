@@ -2,9 +2,17 @@ import java.util.List;
 
 public class Reservation {
     private Reservation_Strategy strategy;
+    private static Reservation instance;
 
-    public Reservation() {
+    private Reservation() {
         strategy = new First_Reservation();
+    }
+
+    public static Reservation getInstance() {
+        if (instance == null) {
+            instance = new Reservation();
+        }
+        return instance;
     }
 
     public void setStrategy(Reservation_Strategy strategy) {
