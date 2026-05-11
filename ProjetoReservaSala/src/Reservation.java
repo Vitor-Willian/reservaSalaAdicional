@@ -1,5 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import Rooms.Room;
 
 public class Reservation {
     private Reservation_Strategy strategy;
@@ -49,5 +52,25 @@ public class Reservation {
     }
     public List<Reserve> getReserves() {
         return this.reserves;
+    }
+
+    public boolean roomAvailability(Room room, String start_schedule, String end_schedule) {
+      
+        LocalDateTime start = LocalDateTime.parse(start_schedule, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime end = LocalDateTime.parse(end_schedule, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        for (Reserve reserve : this.reserves) {
+
+            Room res_room = reserve.getRoom();
+            LocalDateTime res_start = reserve.getStart_schedule();
+            LocalDateTime res_end = reserve.getEnd_schedule();
+
+            if (res_room.getRoomNumber() == room.getRoomNumber()) {
+                if (res_start.compareTo(end) < 0 && res_end.compareTo(start) > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -1,13 +1,15 @@
 public class User implements Observer {
     private String name;
     private String role;
+    private boolean error = false;
 
     public User(String name, String role) {
         this.name = name;
         if(role.equals("Professor") || role.equals("Aluno")) {
             this.role = role;
         } else {
-            throw new IllegalArgumentException("Atributo 'role' deve ser 'Professor' ou 'Aluno'");
+            System.out.println("Atributo 'role' deve ser 'Professor' ou 'Aluno'\n");
+            this.error = true;
         }
     }
 
@@ -17,6 +19,10 @@ public class User implements Observer {
 
     public String getRole() {
         return role;
+    }
+
+    public boolean hasError() {
+        return error;
     }
 
     @Override
