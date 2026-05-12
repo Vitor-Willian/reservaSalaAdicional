@@ -20,7 +20,8 @@ public class App {
             System.out.println("4. Listar reservas");
             System.out.println("5. Definir estratégia de reserva");
             System.out.println("6. Modificar reserva");
-            System.out.println("7. Sair\n");
+            System.out.println("7. Relatório de reservas");
+            System.out.println("8. Sair\n");
 
             int choice = Input.getInt("Escolha uma opção: ");
 
@@ -150,8 +151,12 @@ public class App {
                                               rooms.stream().filter(r -> Integer.toString(r.getRoomNumber()).equals(newRoomNumStr)).findFirst().orElse(null));
                     reservation.updateReserve(oldReserve, newReserve);
                     break;
-
+                
                 case 7:
+                    reservation.report();
+                    break;
+
+                case 8:
                     running = false;
                     System.out.println("Saindo do sistema. Até mais!");
                     break;

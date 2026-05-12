@@ -73,4 +73,12 @@ public class Reservation {
         }
         return true;
     }
+
+    public void report() {
+        System.out.println("------------Reservas------------");
+        for (Reserve reserve : this.reserves) {
+            System.out.println("reserva da sala " + reserve.getRoom().getRoomNumber() + " das " + reserve.getStart_schedule() + " as " + reserve.getEnd_schedule());
+        }
+        System.out.println("--------------------------------");
+    }
 }
