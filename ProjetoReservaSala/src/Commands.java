@@ -144,4 +144,14 @@ public class Commands {
             System.out.println("Reserva removida com sucesso!\n");
         }
     }
+
+    void listAvailableRooms(List<Room> rooms, Reservation reservation) {
+        String startSchedule = Input.getString("Digite o horário de início para verificar disponibilidade (formato: yyyy-MM-dd HH:mm): ");
+        String endSchedule = Input.getString("Digite o horário de término para verificar disponibilidade (formato: yyyy-MM-dd HH:mm): ");
+
+        System.out.println("Salas disponíveis entre " + startSchedule + " e " + endSchedule + ":");
+        rooms.stream()
+            .filter(r -> reservation.roomAvailability(r, startSchedule, endSchedule))
+            .forEach(r -> System.out.println("Sala " + r.getRoomNumber() + " - Tipo: " + r.getRoomType() + "\n"));
+    }
 }

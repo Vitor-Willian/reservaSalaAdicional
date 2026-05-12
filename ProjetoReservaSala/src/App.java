@@ -1,7 +1,5 @@
 import Rooms.*;
 import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -18,7 +16,7 @@ public class App {
             System.out.println("1. Criar usuário");
             System.out.println("2. Criar sala");
             System.out.println("3. Fazer reserva");
-            System.out.println("4. Listar reservas");
+            System.out.println("4. Listar salas disponíveis");
             System.out.println("5. Definir estratégia de reserva");
             System.out.println("6. Modificar reserva");
             System.out.println("7. Relatório de reservas");
@@ -41,7 +39,7 @@ public class App {
                     break;
                 
                 case 4:
-                    reservation.listReserves();
+                    commands.listAvailableRooms(rooms, reservation);
                     break;
                 
                 case 5:
