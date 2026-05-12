@@ -45,11 +45,7 @@ public class Reservation {
             System.out.println("Reserva não encontrada: " + oldReserve);
         }
     }
-    void listReserves(){
-        for (Reserve reserve : this.reserves) {
-            System.out.println(reserve.getUser().getName() + " reservou a sala " + reserve.getRoom().getRoomNumber() + " das " + reserve.getStart_schedule() + " às " + reserve.getEnd_schedule());
-        }
-    }
+   
     public List<Reserve> getReserves() {
         return this.reserves;
     }
