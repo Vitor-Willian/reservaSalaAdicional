@@ -4,13 +4,11 @@ public class Group_Room implements Room {
     private String roomType;
     private int roomNumber;
     private int capacity;
-    private boolean isOccupied;
 
     public Group_Room(int roomNumber, int capacity) {
         this.roomType = "Sala de Grupo";
         this.roomNumber = roomNumber;
         this.capacity = capacity;
-        this.isOccupied = false;
     }
 
     public String getRoomType() {
@@ -24,9 +22,4 @@ public class Group_Room implements Room {
     public int getCapacity() {
         return capacity;
     }
-
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-    
 }
