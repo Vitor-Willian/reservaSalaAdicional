@@ -9,13 +9,15 @@ public class Reserve implements Subject{
     private Room room;
     private List<Observer> observers = new ArrayList<>();
 
-    public Reserve(User user, String start_schedule, String end_schedule, Room room) {
+    public Reserve(User user, String start_schedule, String end_schedule, Room room) throws Exception {
+        addObserver(user);
         if(room instanceof Lab_Proxy) {
             if(!((Lab_Proxy) room).reservePermitted(user.getRole())) {
-                notifyObservers("Reserva Negada: " + user.getName() + " não tem permissão para reservar a sala " + room.getRoomNumber());
-                return;
+                notifyObservers("Reserva Negada: " + user.getName() + " tentou reservar a sala " + room.getRoomNumber());
+                throw new Exception("Apenas Professores podem reservar a sala " + room.getRoomNumber());
             }
         }
+        
         
         this.user = user;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -23,7 +25,6 @@ public class Reserve implements Subject{
         this.end_schedule = LocalDateTime.parse(end_schedule, formatter);
         this.room = room;
         
-        addObserver(this.user);
         notifyObservers("Reserva Solicitada: " + this.user.getName() + " " + this.room.getRoomNumber());
     }
 

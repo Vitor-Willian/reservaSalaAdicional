@@ -1,6 +1,6 @@
 public class Multimedia_Decorator extends Reserve_Decorator {
     private String Equipment;
-    public Multimedia_Decorator(Reserve reserve, String equipment) {
+    public Multimedia_Decorator(Reserve reserve, String equipment) throws Exception {
         super(reserve);
         this.Equipment = equipment;
         addMultimediaEquipment();
