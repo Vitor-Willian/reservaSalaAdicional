@@ -10,6 +10,13 @@ public class Reserve implements Subject{
     private List<Observer> observers = new ArrayList<>();
 
     public Reserve(User user, String start_schedule, String end_schedule, Room room) {
+        if(room instanceof Lab_Proxy) {
+            if(!((Lab_Proxy) room).reservePermitted(user.getRole())) {
+                notifyObservers("Reserva Negada: " + user.getName() + " não tem permissão para reservar a sala " + room.getRoomNumber());
+                return;
+            }
+        }
+        
         this.user = user;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.start_schedule = LocalDateTime.parse(start_schedule, formatter);
