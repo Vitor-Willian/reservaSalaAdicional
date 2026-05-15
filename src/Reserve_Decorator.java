@@ -4,7 +4,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class Reserve_Decorator extends Reserve {
     protected Reserve reserve;
 
-    public Reserve_Decorator(Reserve reserve) {
+    public Reserve_Decorator(Reserve reserve) throws Exception {
+        
         super(reserve.getUser(), 
               formatDateTime(reserve.getStart_schedule()), 
               formatDateTime(reserve.getEnd_schedule()), 

@@ -9,14 +9,31 @@ public class Reserve implements Subject{
     private Room room;
     private List<Observer> observers = new ArrayList<>();
 
-    public Reserve(User user, String start_schedule, String end_schedule, Room room) {
+    public Reserve(User user, String start_schedule, String end_schedule, Room room) throws Exception {
+        addObserver(user);
+        
+        // Verificação existente do Laboratório
+        if(room instanceof Lab_Proxy) {
+            if(!((Lab_Proxy) room).reservePermitted(user.getRole())) {
+                notifyObservers("Reserva Negada: " + user.getName() + " tentou reservar a sala " + room.getRoomNumber());
+                throw new Exception("Apenas Professores podem reservar a sala " + room.getRoomNumber());
+            }
+        }
+        
+        // verificação para a sala individual 
+        if(room instanceof Individual_Proxy) {
+            if(!((Individual_Proxy) room).reservePermitted(user.getRole())) {
+                notifyObservers("Reserva Negada: " + user.getName() + " tentou reservar a sala " + room.getRoomNumber());
+                throw new Exception("Professores não podem reservar salas individuais (Sala " + room.getRoomNumber() + ")");
+            }
+        }
+        
         this.user = user;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.start_schedule = LocalDateTime.parse(start_schedule, formatter);
         this.end_schedule = LocalDateTime.parse(end_schedule, formatter);
         this.room = room;
         
-        addObserver(this.user);
         notifyObservers("Reserva Solicitada: " + this.user.getName() + " " + this.room.getRoomNumber());
     }
 

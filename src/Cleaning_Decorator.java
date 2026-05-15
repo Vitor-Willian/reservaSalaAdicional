@@ -1,6 +1,6 @@
 public class Cleaning_Decorator extends Reserve_Decorator {
 
-    public Cleaning_Decorator(Reserve reserve) {
+    public Cleaning_Decorator(Reserve reserve) throws Exception {
         super(reserve);
         addCleaningService();
     }

@@ -51,35 +51,40 @@ public class Commands {
         String startSchedule = Input.getString("Digite o horário de início da reserva (formato: yyyy-MM-dd HH:mm): ");
         String endSchedule = Input.getString("Digite o horário de término da reserva (formato: yyyy-MM-dd HH:mm): ");
 
-        Reserve reserve = new Reserve(users.stream().filter(u -> u.getName().equals(userName)).findFirst().orElse(null),
-                                  startSchedule, endSchedule,
-                                  rooms.stream().filter(r -> Integer.toString(r.getRoomNumber()).equals(roomNumStr)).findFirst().orElse(null));
+        try {
+            Reserve reserve = new Reserve(users.stream().filter(u -> u.getName().equals(userName)).findFirst().orElse(null),
+                                        startSchedule, endSchedule,
+                                        rooms.stream().filter(r -> Integer.toString(r.getRoomNumber()).equals(roomNumStr)).findFirst().orElse(null));
+            
+            System.out.println("Tudo certo até aqui, deseja adicionar um serviço extra?");
+            System.out.println("1. Serviço de limpeza");
+            System.out.println("2. Equipamentos multimídia");
+            System.out.println("3. Nenhum");
 
-        System.out.println("Tudo certo até aqui, deseja adicionar um serviço extra?");
-        System.out.println("1. Serviço de limpeza");
-        System.out.println("2. Equipamentos multimídia");
-        System.out.println("3. Nenhum");
+            int extraChoice = Input.getInt("Escolha uma opção: ");
+            switch (extraChoice) {
+                case 1:
+                    reserve = new Cleaning_Decorator(reserve);
+                    break;
 
-        int extraChoice = Input.getInt("Escolha uma opção: ");
-        switch (extraChoice) {
-            case 1:
-                reserve = new Cleaning_Decorator(reserve);
-                break;
+                case 2:
+                    String equipment = Input.getString("Digite o equipamento multimídia desejado: ");
+                    reserve = new Multimedia_Decorator(reserve, equipment);
+                    break;
 
-            case 2:
-                String equipment = Input.getString("Digite o equipamento multimídia desejado: ");
-                reserve = new Multimedia_Decorator(reserve, equipment);
-                break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opção inválida, continuando sem serviço extra.\n");
+            }
 
-            case 3:
-                break;
-            default:
-                System.out.println("Opção inválida, continuando sem serviço extra.\n");
-        }
-
-        reservation.addReserve(reserve);
-        System.out.println("Reserva feita com sucesso!\n");
+            reservation.addReserve(reserve);
+            System.out.println("Reserva feita com sucesso!\n");
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao criar reserva: " + e.getMessage() + "\n");
     }
+}
 
     void setStrategy(Reservation reservation){
         System.out.println("Escolha a estratégia de reserva:");
